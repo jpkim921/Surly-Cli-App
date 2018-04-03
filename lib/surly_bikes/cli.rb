@@ -3,8 +3,9 @@
 class SurlyBikes::CLI
 
   def greeting
-    list_bikes
+    # list_bikes
     menu
+    goodbye
   end
 
   def list_bikes
@@ -18,23 +19,30 @@ class SurlyBikes::CLI
   end
 
   def menu
-    puts "Enter the number of the category you would like to browse:"
+    # puts "Enter the number of the category you would like to browse:"
 
     input = nil
     while input != "exit"
+    puts "Enter the number of the category you would like to browse or type exit to end:"
+    list_bikes
     input = gets.strip.downcase
-    case input
-    when "1"
-      puts "list of Pavement category bikes"
-    when "2"
-      puts "list of Touring category bikes"
-    when "3"
-      puts "list of Haulin' category bikes and trailers"
-    when "4"
-      puts "list of Trail category bikes"
+      case input
+        when "1"
+          puts "list of Pavement category bikes"
+        when "2"
+          puts "list of Touring category bikes"
+        when "3"
+          puts "list of Haulin' category bikes and trailers"
+        when "4"
+          puts "list of Trail category bikes"
+        else
+          puts "Enter number again: "
+      end
     end
+  end
 
-
+  def goodbye
+    puts "Contact your local Surly dealer for more info."
   end
 
 end
