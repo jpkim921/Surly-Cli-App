@@ -1,5 +1,8 @@
-require "surly_bikes/version"
+# this file will act as the environment file
 
+require_relative "./surly_bikes/version"
+require_relative './surly_bikes/cli'
+
+# Your code goes here...
 module SurlyBikes
-  # Your code goes here...
 end
