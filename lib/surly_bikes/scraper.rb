@@ -14,22 +14,14 @@ class SurlyBikes::Scraper
     DOC
   end
 
-
-  def self.scrape_models_url_by_category
-      # return an array of hashes:
-      # [{pavement:
-      #   {midnightspecial:"https://surlybikes.com/bikes/midnight_special"},
-      #   crosscheck: "https://surlybikes.com/bikes/cross_check"
-      #   },
-      #   {touring: {bridgeclub:"https://surlybikes.com/bikes/bridge_club"},
-      #   pugsley: "https://surlybikes.com/bikes/pugsley"
-      #   }]
-
-      data = Nokogiri::HTML(open('https://surlybikes.com/bikes'))
-
+  # return a list of all urls for all bikes
+  def self.scrape_model_urls
+    data = Nokogiri::HTML(open('https://surlybikes.com/bikes'))
+    data.css('div div.span-6.bike-block.left a').collect {|x| x.attribute('href').text}
   end
 # binding.pry
-end
+
+end #<--class end
 
 
 #

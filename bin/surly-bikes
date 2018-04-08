@@ -3,7 +3,5 @@
 require './lib/surly_bikes'
 require 'pry'
 
-SurlyBikes::Scraper.scrape_models_url_by_category
+SurlyBikes::Scraper.scrape_model_urls
 # SurlyBikes::CLI.new.greeting
-
-# PRY.start
