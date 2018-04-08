@@ -1,5 +1,5 @@
 # CLI Controller
-
+require_relative '../surly_bikes'
 class SurlyBikes::CLI
 
   def greeting
@@ -25,6 +25,7 @@ class SurlyBikes::CLI
     while input != "exit"
     puts "Enter the number of the category you would like to browse or type exit to end:"
     list_bikes
+    SurlyBikes::Scraper.tester
     input = gets.strip.downcase
       case input
         when "1"
@@ -35,8 +36,6 @@ class SurlyBikes::CLI
           puts "list of Haulin' category bikes and trailers"
         when "4"
           puts "list of Trail category bikes"
-        else
-          puts "Enter number again: "
       end
     end
   end

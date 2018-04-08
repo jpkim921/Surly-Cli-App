@@ -1,5 +1,9 @@
 #!/usr/bin/env ruby
 
 require './lib/surly_bikes'
+require 'pry'
 
-SurlyBikes::CLI.new.greeting
+SurlyBikes::Scraper.scrape_models_url_by_category
+# SurlyBikes::CLI.new.greeting
+
+# PRY.start
