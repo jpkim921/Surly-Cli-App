@@ -81,7 +81,77 @@
 ==========================================================================================
 
 grabs the tab text
-data.css('#info-nav a').collect {|x| x.text}
+data.css('li.nav-item a').collect {|x| x.text}
 
 grabs the url of the nav-bar
-data.css('#info-nav a').collect {|x| x.attribute('href').text}
+data.css('li.nav-item a').collect {|x| x.attribute('href').text}
+
+name of bike in specific bike page
+Nokogiri::HTML(open('https://surlybikes.com/bikes/midnight_special')).css('h1').text
+
+==========================================================================================
+==========================================================================================
+==========================================================================================
+
+Array of hashes
+
+data.css('div#info-nav.desktop a').collect{|x| {x.text.downcase.split(" ").join("_").to_sym => url + "/" + x.attribute('href').text}}
+
+Array of bike hashes
+
+data.css('div#info-nav.desktop a').collect{|x| {x.text.to_sym => "URL" + "/" + x.attribute('href').text}}
+
+
+=> [{:Info=>"URL/bike_info"}, {:"Complete Bike Parts Kit"=>"URL/bike_specs"}, {:Geometry=>"URL/geometry"}, {:"Frame Highlights"=>"URL/frame_highlights"}]
+
+
+nested array of nav text and nav links
+
+data.css('div#info-nav.desktop a').collect {|x| [x.attribute('href').text.to_sym, url + "/" + x.attribute('href').text]}
+
+
+
+=> [[:bike_info, "https://surlybikes.com/bikes/midnight_special/bike_info"], [:bike_specs, "https://surlybikes.com/bikes/midnight_special/bike_specs"], [:geometry, "https://surlybikes.com/bikes/midnight_special/geometry"], [:frame_highlights, "https://surlybikes.com/bikes/midnight_special/frame_highlights"]]
+
+
+data.css('div#info-nav.desktop a').collect {|x| [x.attribute('href').text.to_sym, url + "/" + x.attribute('href').text]}.to_h
+
+
+
+https://surlybikes.com/bikes/midnight_special/bike_specs
+
+
+
+#bike-build-specs .left strong
+
+
+
+specs.css('#bike-build-specs .left strong').each{|x| puts x.text}
+
+specs.css('#bike-build-specs .last').each {|x| puts x.text}
+
+
+
+specs.css('div#bike-build-specs .left strong').collect {|x| x.text}
+
+
+
+
+data.css('div.span-7.first.left').each{|x| puts x.text}
+
+
+
+
+data.css('div#bike-build-specs.span-17').each{|x| puts x.css('div').text}
+
+
+
+
+section = data.css('div#bike-build-specs.span-17')
+
+section.css('div .left').collect {|x| x.text}
+
+
+
+
+arr = section.css('div .left').collect {|x| x.text}

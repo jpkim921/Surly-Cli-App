@@ -5,5 +5,6 @@ require 'pry'
 
 # SurlyBikes::CLI.new.greeting
 
-puts SurlyBikes::Scraper.scrape_model_urls
-# SurlyBikes::Scraper.create_bike_nav_urls('https://surlybikes.com/bikes/midnight_special')
+bikes = SurlyBikes::Scraper.new
+bikes.create_bike_nav_urls
+binding.pry
