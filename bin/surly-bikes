@@ -5,6 +5,10 @@ require 'pry'
 
 # SurlyBikes::CLI.new.greeting
 
-bikes = SurlyBikes::Scraper.new
-bikes.create_bike_nav_urls
-binding.pry
+# before the change
+# bikes = SurlyBikes::Scraper.new
+# bikes.create_bike_nav_urls
+
+SurlyBikes::CLI.start
+
+# binding.pry

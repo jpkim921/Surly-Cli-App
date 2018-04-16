@@ -15,6 +15,7 @@
 # section = data.css('div#wrapper')
 # section.css('div.bike-grp.clear.product-grid').css('div.block-title-banner').each{|x| puts x.text}
 
+<!-- DONT WANT THIS ANYMORE -->
 # creates an array of hashes by category
 # section.css('h1.bolt-header').collect {|x| bike_hash[:"#{x.text}"] = {}}
 # => {:Pavement=>{}, :Touring=>{}, :Haulin’=>{}, :Trail=>{}}
