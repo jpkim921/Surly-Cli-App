@@ -1,12 +1,41 @@
 # CLI Controller
-require_relative '../surly_bikes'
+# require_relative '../surly_bikes'
+
 class SurlyBikes::CLI
+  attr_accessor :category_array, :input
 
-
-  def self.start
-    # SurlyBikes::Scraper.categories
-    SurlyBikes::Scraper.scrape_bike_info_urls('https://surlybikes.com/bikes/midnight_special')
+  def call
+    setup
+    greetings
+    list_categories
+    binding.pry
   end
+
+  def setup
+    @category_array = SurlyBikes::Scraper.setup.keys
+  end
+
+  def greetings
+    puts "\nWELCOME TO SURLY BIKES - CLI Version\n\n"
+  end
+
+  def list_categories
+    puts "Select a category from below:\n\n"
+    # category_array = SurlyBikes::Scraper.setup.keys
+    self.category_array.each_with_index do |category, index|
+      # puts index + ". " + category.to_s.capitalize
+      puts "#{index + 1}. #{category.to_s.capitalize}"
+    end
+    print "\nType category: "
+    @input = gets.strip.downcase.to_sym
+
+    if self.category_array.include?(input) # || (1..self.category_array.length).include?(input.to_i)
+      return self.input
+    else
+      self.list_categories
+    end
+  end
+
 
 
 

@@ -6,6 +6,7 @@ class SurlyBikes::Scraper
 
 
   # method creates a hash by category => models within category => urls for each bike within category
+  # contains the categories and bike names
   def self.setup
     bikes = {}
     categories.each do |category|

@@ -9,6 +9,6 @@ require 'pry'
 # bikes = SurlyBikes::Scraper.new
 # bikes.create_bike_nav_urls
 
-SurlyBikes::CLI.start
+SurlyBikes::CLI.new.call
 
 # binding.pry
