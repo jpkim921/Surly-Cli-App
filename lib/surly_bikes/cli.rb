@@ -4,8 +4,8 @@ class SurlyBikes::CLI
 
 
   def self.start
-    SurlyBikes::Scraper.categories
-    SurlyBikes::Scraper.setup
+    # SurlyBikes::Scraper.categories
+    SurlyBikes::Scraper.scrape_bike_info_urls('https://surlybikes.com/bikes/midnight_special')
   end
 
 
