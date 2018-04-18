@@ -22,12 +22,25 @@ class SurlyBikes::Scraper
     # binding.pry
   end
 
+
   # method creates a hash of bike models and bike urls for specific category
   def self.bike_list_by_category(category)
     data = Nokogiri::HTML(open('https://surlybikes.com/bikes'))
 
     # array of bike names within the category
     name = data.css("#" + "#{category}" + " .block-title-banner").collect{|block| block.text}
+
+    # # array of bike urls within the category
+    # url = data.css("#" + "#{category}" + " div.bike-grp.clear.product-grid div.span-6.bike-block.left a").collect{|x| x.attribute('href').text}
+    # name.zip(url).to_h
+  end
+
+  # method creates a hash of bike models and bike urls for specific category
+  def self.bike_list_urls_by_category(category)
+    data = Nokogiri::HTML(open('https://surlybikes.com/bikes'))
+
+    # array of bike names within the category
+    name = data.css("#" + "#{category}" + " .block-title-banner").collect{|block| block.text.split(" ").join.downcase.to_sym}
 
     # array of bike urls within the category
     url = data.css("#" + "#{category}" + " div.bike-grp.clear.product-grid div.span-6.bike-block.left a").collect{|x| x.attribute('href').text}

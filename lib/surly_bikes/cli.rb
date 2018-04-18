@@ -8,8 +8,9 @@ class SurlyBikes::CLI
     setup
     greetings
     list_categories
-    SurlyBikes::Scraper.scrape_bike_info
     # binding.pry
+    list_bikes
+    # SurlyBikes::Scraper.scrape_bike_info
   end
 
   def setup
@@ -28,11 +29,11 @@ class SurlyBikes::CLI
       puts "#{index + 1}. #{category.to_s.capitalize}"
     end
     print "\nType category: "
-    @input = gets.strip.downcase.to_sym
+    @input = gets.strip.downcase
 
-    if self.category_array.include?(input) # || (1..self.category_array.length).include?(input.to_i)
+    if self.category_array.include?(input.to_sym) # || (1..self.category_array.length).include?(input.to_i)
       return self.input
-    elsif input.to_s == "exit"
+    elsif input == "exit"
       self.end
     else
       self.list_categories
@@ -41,12 +42,32 @@ class SurlyBikes::CLI
 
 
   def list_bikes
-    
+    puts "Select a bike from below:\n\n"
+    list = SurlyBikes::Scraper.bike_list_by_category(input)
+    url_list = SurlyBikes::Scraper.bike_list_urls_by_category(input)
+    list.each_with_index do |bike, index|
+      puts "#{index + 1}. #{bike}"
+    end
+    print "\nType bike name: "
+    bike_input = gets.strip.downcase
+    # url_list
+    # url_list[input.split(" ").join.to_sym]
+    # binding.pry
+
+    if list.map{|x| x.upcase}.include?(bike_input.upcase) # || (1..self.category_array.length).include?(input.to_i)
+      puts url_list[bike_input.split(" ").join.to_sym]
+      return url_list[bike_input.split(" ").join.to_sym]
+    elsif bike_input == "exit"
+      self.end
+    else
+      puts "\nOops! Try again!\n"
+      self.list_bikes
+    end
   end
 
 
   def end
-    puts "Visit https://surlybikes.com/ to check out more bike goodness!!!"
+    puts "\nVisit https://surlybikes.com/ to check out more bike goodness!!!\n"
     exit
   end
 
