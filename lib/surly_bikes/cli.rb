@@ -8,7 +8,8 @@ class SurlyBikes::CLI
     setup
     greetings
     list_categories
-    binding.pry
+    SurlyBikes::Scraper.scrape_bike_info
+    # binding.pry
   end
 
   def setup
@@ -31,13 +32,23 @@ class SurlyBikes::CLI
 
     if self.category_array.include?(input) # || (1..self.category_array.length).include?(input.to_i)
       return self.input
+    elsif input.to_s == "exit"
+      self.end
     else
       self.list_categories
     end
   end
 
 
+  def list_bikes
+    
+  end
 
+
+  def end
+    puts "Visit https://surlybikes.com/ to check out more bike goodness!!!"
+    exit
+  end
 
 
 #   attr_accessor :bike_hash

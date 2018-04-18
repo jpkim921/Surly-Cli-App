@@ -125,34 +125,52 @@ https://surlybikes.com/bikes/midnight_special/bike_specs
 
 #bike-build-specs .left strong
 
-
-
-specs.css('#bike-build-specs .left strong').each{|x| puts x.text}
-
-specs.css('#bike-build-specs .last').each {|x| puts x.text}
+data.css('#bike-build-specs .left strong').collect {|part_name| part_name.text}
+data.css('#bike-build-specs .last').collect {|part| part.text}
 
 
 
 specs.css('div#bike-build-specs .left strong').collect {|x| x.text}
-
-
-
-
 data.css('div.span-7.first.left').each{|x| puts x.text}
-
-
-
-
 data.css('div#bike-build-specs.span-17').each{|x| puts x.css('div').text}
-
-
-
-
 section = data.css('div#bike-build-specs.span-17')
-
 section.css('div .left').collect {|x| x.text}
-
-
-
-
 arr = section.css('div .left').collect {|x| x.text}
+
+
+==========================================================================================
+==========================================================================================
+==========================================================================================
+==========================================================================================
+==========================================================================================
+==========================================================================================
+
+def self.scrape
+# 		url = "https://surlybikes.com/bikes/midnight_special/bike_specs"
+# 		@data = Nokogiri::HTML(open(url))
+		hash = {:bike_info=>"https://surlybikes.com/bikes/midnight_special/bike_info", :bike_specs=>"https://surlybikes.com/bikes/midnight_special/bike_specs", :geometry=>"https://surlybikes.com/bikes/midnight_special/geometry", :frame_highlights=>"https://surlybikes.com/bikes/midnight_special/frame_highlights"}
+# 		hash = {:bike_info=>"https://surlybikes.com/bikes/midnight_special/bike_info"}
+# 		, :bike_specs=>"https://surlybikes.com/bikes/midnight_special/bike_specs", :geometry=>"https://surlybikes.com/bikes/midnight_special/geometry", :frame_highlights=>"https://surlybikes.com/bikes/midnight_special/frame_highlights"}
+
+		bike_info = {}
+		hash.each do |type, url|
+
+			if type == "bike_info".to_sym
+				data = Nokogiri::HTML(open(url))
+				bike_info[type.to_sym] = data.css('#bike-info p').text
+			elsif type == "bike_specs".to_sym
+				data = Nokogiri::HTML(open(url))
+				bike_info[type.to_sym] = "specs"
+			elsif type == "geometry".to_sym
+				data = Nokogiri::HTML(open(url))
+				bike_info[type.to_sym] = "geometry"
+			elsif type == "frame_highlights".to_sym
+				data = Nokogiri::HTML(open(url))
+				bike_info[type.to_sym] = "frame hightlights"
+			end
+
+		end
+		bike_info		
+	end
+
+end

@@ -44,6 +44,39 @@ class SurlyBikes::Scraper
 
 
 
+  def self.scrape_bike_info(hash)
+  #	url = "https://surlybikes.com/bikes/midnight_special/bike_specs"
+  #	@data = Nokogiri::HTML(open(url))
+
+  	# hash = {:bike_info=>"https://surlybikes.com/bikes/midnight_special/bike_info", :bike_specs=>"https://surlybikes.com/bikes/midnight_special/bike_specs", :geometry=>"https://surlybikes.com/bikes/midnight_special/geometry", :frame_highlights=>"https://surlybikes.com/bikes/midnight_special/frame_highlights"}
+
+  # hash = {:frame_highlights=>"https://surlybikes.com/bikes/midnight_special/frame_highlights"}
+  # , :bike_specs=>"https://surlybikes.com/bikes/midnight_special/bike_specs", :geometry=>"https://surlybikes.com/bikes/midnight_special/geometry", :frame_highlights=>"https://surlybikes.com/bikes/midnight_special/frame_highlights"}
+
+  	bike_info_hash = {}
+  	hash.each do |type, url|
+
+  		if type == "bike_info".to_sym
+  			data = Nokogiri::HTML(open(url))
+  			bike_info_hash[type.to_sym] = data.css('#bike-info p').text
+  		elsif type == "bike_specs".to_sym
+  			data = Nokogiri::HTML(open(url))
+        left = data.css('#bike-build-specs .left strong').collect {|part_name| part_name.text}
+        right = data.css('#bike-build-specs .last').collect {|part| part.text}
+  			bike_info_hash[type.to_sym] = left.zip(right).to_h
+      elsif type == "geometry".to_sym
+  			data = Nokogiri::HTML(open(url))
+  			bike_info_hash[type.to_sym] = "geometry"
+  		elsif type == "frame_highlights".to_sym
+  			data = Nokogiri::HTML(open(url))
+  			bike_info_hash[type.to_sym] = "frame hightlights"
+  		end
+    end
+    # binding.pry
+	bike_info_hash
+  end
+
+
 
 
 
