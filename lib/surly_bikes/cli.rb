@@ -92,6 +92,10 @@ class SurlyBikes::CLI
   def again
     puts "\nLook at another bike (yes/no)?"
     input = gets.strip.downcase
+    until input == "yes" || input == "no"
+      again
+    end
+
     if input == "no"
       self.end
     elsif input == "yes"
