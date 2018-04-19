@@ -2,15 +2,16 @@
 # require_relative '../surly_bikes'
 
 class SurlyBikes::CLI
-  attr_accessor :category_array, :input, :bike
+  attr_accessor :category_array, :input, :bike_info_specs, :bike
 
   def call
     setup
     greetings
     list_categories
-    # binding.pry
     list_bikes
-    bike_hash
+    bike_object
+    display_bike
+    # binding.pry
     # SurlyBikes::Scraper.scrape_bike_info
   end
 
@@ -58,7 +59,7 @@ class SurlyBikes::CLI
     if list.map{|x| x.upcase}.include?(bike_input.upcase) # || (1..self.category_array.length).include?(input.to_i)
       # puts url_list[bike_input.split(" ").join.to_sym]
       url = url_list[bike_input.split(" ").join.to_sym]
-      @bike = SurlyBikes::Scraper.scrape_bike_info_urls(url)
+      @bike_info_specs = SurlyBikes::Scraper.scrape_bike_info_urls(url)
       # binding.pry
     elsif bike_input == "exit"
       self.end
@@ -69,10 +70,21 @@ class SurlyBikes::CLI
   end
 
   def bike_hash
-    SurlyBikes::Scraper.scrape_bike_info(bike)
+    SurlyBikes::Scraper.scrape_bike_info(bike_info_specs)
   end
 
+  def bike_object
+    @bike = SurlyBikes::Bike.new(self.bike_hash)
+  end
 
+  def display_bike
+    puts bike.bike_info
+    # bike.bike_specs.each {|x| puts x}
+    bike.bike_specs.each {|k,v| puts "\n#{k}:\n#{v}"}
+    # binding.pry
+  end
+
+  
 
 
   def end

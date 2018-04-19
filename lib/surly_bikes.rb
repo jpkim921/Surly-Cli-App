@@ -7,6 +7,7 @@ require 'open-uri'
 require_relative "./surly_bikes/version"
 require_relative './surly_bikes/cli'
 require_relative './surly_bikes/scraper'
+require_relative './surly_bikes/bike'
 
 # Your code goes here...
 module SurlyBikes

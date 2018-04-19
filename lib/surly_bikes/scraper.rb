@@ -77,12 +77,13 @@ class SurlyBikes::Scraper
         left = data.css('#bike-build-specs .left strong').collect {|part_name| part_name.text}
         right = data.css('#bike-build-specs .last').collect {|part| part.text}
   			bike_info_hash[type.to_sym] = left.zip(right).to_h
-      elsif type == "geometry".to_sym
-  			data = Nokogiri::HTML(open(url))
-  			bike_info_hash[type.to_sym] = "geometry"
-  		elsif type == "frame_highlights".to_sym
-  			data = Nokogiri::HTML(open(url))
-  			bike_info_hash[type.to_sym] = "frame hightlights"
+        # binding.pry
+      # elsif type == "geometry".to_sym
+  		# 	data = Nokogiri::HTML(open(url))
+  		# 	bike_info_hash[type.to_sym] = "geometry"
+  		# elsif type == "frame_highlights".to_sym
+  		# 	data = Nokogiri::HTML(open(url))
+  		# 	bike_info_hash[type.to_sym] = "frame hightlights"
   		end
     end
     # binding.pry
