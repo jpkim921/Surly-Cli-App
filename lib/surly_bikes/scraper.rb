@@ -57,7 +57,7 @@ class SurlyBikes::Scraper
 
 
 
-  def self.scrape_bike_info(url)
+  def self.scrape_bike_info(hash)
   #	url = "https://surlybikes.com/bikes/midnight_special/bike_specs"
   #	@data = Nokogiri::HTML(open(url))
 

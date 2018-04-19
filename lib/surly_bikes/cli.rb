@@ -2,7 +2,7 @@
 # require_relative '../surly_bikes'
 
 class SurlyBikes::CLI
-  attr_accessor :category_array, :input, :bike_hash
+  attr_accessor :category_array, :input, :bike
 
   def call
     setup
@@ -10,6 +10,7 @@ class SurlyBikes::CLI
     list_categories
     # binding.pry
     list_bikes
+    bike_hash
     # SurlyBikes::Scraper.scrape_bike_info
   end
 
@@ -57,8 +58,8 @@ class SurlyBikes::CLI
     if list.map{|x| x.upcase}.include?(bike_input.upcase) # || (1..self.category_array.length).include?(input.to_i)
       # puts url_list[bike_input.split(" ").join.to_sym]
       url = url_list[bike_input.split(" ").join.to_sym]
-      @bike_hash = SurlyBikes::Scraper.scrape_bike_info_urls(url)
-      binding.pry
+      @bike = SurlyBikes::Scraper.scrape_bike_info_urls(url)
+      # binding.pry
     elsif bike_input == "exit"
       self.end
     else
@@ -66,6 +67,11 @@ class SurlyBikes::CLI
       self.list_bikes
     end
   end
+
+  def bike_hash
+    SurlyBikes::Scraper.scrape_bike_info(bike)
+  end
+
 
 
 
