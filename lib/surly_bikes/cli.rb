@@ -81,8 +81,12 @@ class SurlyBikes::CLI
   def display_bike
     puts bike.bike_info
     # bike.bike_specs.each {|x| puts x}
-    bike.bike_specs.each {|k,v| puts "\n#{k}:\n#{v}"}
     # binding.pry
+    if bike.bike_specs != nil
+      bike.bike_specs.each do |k,v|
+        puts "\n#{k}:\n#{v}"
+      end
+    end
   end
 
   def again
