@@ -11,6 +11,7 @@ class SurlyBikes::CLI
     list_bikes
     bike_object
     display_bike
+    again
     # binding.pry
     # SurlyBikes::Scraper.scrape_bike_info
   end
@@ -84,7 +85,15 @@ class SurlyBikes::CLI
     # binding.pry
   end
 
-  
+  def again
+    puts "\nLook at another bike (yes/no)?"
+    input = gets.strip.downcase
+    if input == "no"
+      self.end
+    elsif input == "yes"
+      self.call
+    end
+  end
 
 
   def end
