@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require './lib/surly_bikes'
+require_relative '../lib/surly_bikes'
 require 'pry'
 
 # SurlyBikes::CLI.new.greeting
